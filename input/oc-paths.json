@@ -1,0 +1,10 @@
+{	
+    "openconfig-platform:components": [null],
+    "openconfig-interfaces:interfaces": [null],
+    "openconfig-local-routing:local-routes": [null],
+    "openconfig-mpls:mpls": [null],
+    "openconfig-lacp:lacp": [null],
+    "openconfig-vlan:vlans": [null],
+    "openconfig-network-instance:network-instances": [null],
+    "openconfig-telemetry:telemetry-system": [null]
+}

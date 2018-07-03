@@ -1,0 +1,588 @@
+{
+  "openconfig-interfaces:interfaces": {
+   "interface": [
+    {
+     "name": "MgmtEth0/RP0/CPU0/0",
+     "config": {
+      "name": "MgmtEth0/RP0/CPU0/0",
+      "type": "iana-if-type:ethernetCsmacd",
+      "enabled": true
+     },
+     "openconfig-if-ethernet:ethernet": {
+      "config": {
+       "auto-negotiate": false
+      }
+     },
+     "subinterfaces": {
+      "subinterface": [
+       {
+        "index": 0,
+        "openconfig-if-ip:ipv6": {
+         "addresses": {
+          "address": [
+           {
+            "ip": "2001:420:2cff:1204::5501:3",
+            "config": {
+             "ip": "2001:420:2cff:1204::5501:3",
+             "prefix-length": 64
+            }
+           }
+          ]
+         }
+        }
+       }
+      ]
+     }
+    }
+   ]
+  },
+  "openconfig-lacp:lacp": {
+   "interfaces": {
+    "interface": [
+     {
+      "name": "MgmtEth0/RP0/CPU0/0",
+      "config": {
+       "name": "MgmtEth0/RP0/CPU0/0"
+      }
+     }
+    ]
+   }
+  },
+  "openconfig-telemetry:telemetry-system": {
+   "sensor-groups": {
+    "sensor-group": [
+     {
+      "sensor-group-id": "LLDP",
+      "config": {
+       "sensor-group-id": "LLDP"
+      },
+      "sensor-paths": {
+       "sensor-path": [
+        {
+         "path": "Cisco-IOS-XR-ethernet-lldp-oper:lldp/nodes/node/neighbors/details/detail",
+         "config": {
+          "path": "Cisco-IOS-XR-ethernet-lldp-oper:lldp/nodes/node/neighbors/details/detail"
+         }
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "subscriptions": {
+    "persistent": {
+     "subscription": [
+      {
+       "subscription-id": "TEST",
+       "config": {
+        "subscription-id": "TEST"
+       },
+       "sensor-profiles": {
+        "sensor-profile": [
+         {
+          "sensor-group": "LLDP",
+          "config": {
+           "sensor-group": "LLDP",
+           "sample-interval": "60000"
+          }
+         }
+        ]
+       },
+       "destination-groups": {
+        "destination-group": [
+         {
+          "group-id": "Ubuntu1",
+          "config": {
+           "group-id": "Ubuntu1"
+          }
+         }
+        ]
+       }
+      }
+     ]
+    }
+   },
+   "destination-groups": {
+    "destination-group": [
+     {
+      "group-id": "Ubuntu1",
+      "config": {
+       "group-id": "Ubuntu1"
+      },
+      "destinations": {
+       "destination": [
+        {
+         "destination-address": "10.87.90.185",
+         "destination-port": 57500,
+         "config": {
+          "destination-address": "10.87.90.185",
+          "destination-port": 57500
+         }
+        }
+       ]
+      }
+     }
+    ]
+   }
+  },
+  "openconfig-network-instance:network-instances": {
+   "network-instance": [
+    {
+     "name": "default",
+     "protocols": {
+      "protocol": [
+       {
+        "identifier": "openconfig-policy-types:ISIS",
+        "name": "BB2",
+        "config": {
+         "identifier": "openconfig-policy-types:ISIS",
+         "name": "BB2"
+        },
+        "isis": {
+         "global": {
+          "config": {
+           "level-capability": "LEVEL_2",
+           "max-ecmp-paths": 32,
+           "net": [
+            "49.0000.0162.0151.0250.0013.00"
+           ]
+          },
+          "nsr": {
+           "config": {
+            "enabled": false
+           }
+          },
+          "graceful-restart": {
+           "config": {
+            "enabled": false
+           }
+          },
+          "segment-routing": {
+           "config": {
+            "enabled": false
+           }
+          },
+          "lsp-bit": {
+           "attached-bit": {
+            "config": {
+             "suppress-bit": false
+            }
+           }
+          },
+          "afi-safi": {
+           "af": [
+            {
+             "afi-name": "openconfig-isis-types:IPV4",
+             "safi-name": "openconfig-isis-types:UNICAST",
+             "config": {
+              "afi-name": "openconfig-isis-types:IPV4",
+              "safi-name": "openconfig-isis-types:UNICAST"
+             }
+            }
+           ]
+          },
+          "timers": {
+           "config": {
+            "lsp-lifetime-interval": 4000,
+            "lsp-refresh-interval": 3600
+           }
+          }
+         },
+         "interfaces": {
+          "interface": [
+           {
+            "interface-id": "Loopback60",
+            "config": {
+             "interface-id": "Loopback60",
+             "enabled": true,
+             "passive": true,
+             "hello-padding": "STRICT"
+            },
+            "interface-ref": {
+             "config": {
+              "interface": "Loopback60"
+             }
+            },
+            "afi-safi": {
+             "af": [
+              {
+               "afi-name": "openconfig-isis-types:IPV4",
+               "safi-name": "openconfig-isis-types:UNICAST",
+               "config": {
+                "afi-name": "openconfig-isis-types:IPV4",
+                "safi-name": "openconfig-isis-types:UNICAST",
+                "enabled": true
+               }
+              },
+              {
+               "afi-name": "openconfig-isis-types:IPV6",
+               "safi-name": "openconfig-isis-types:UNICAST",
+               "config": {
+                "afi-name": "openconfig-isis-types:IPV6",
+                "safi-name": "openconfig-isis-types:UNICAST",
+                "enabled": true
+               }
+              }
+             ]
+            }
+           },
+           {
+            "interface-id": "TenGigE0/0/0/20",
+            "config": {
+             "interface-id": "TenGigE0/0/0/20",
+             "enabled": true,
+             "passive": false,
+             "hello-padding": "STRICT",
+             "circuit-type": "POINT_TO_POINT"
+            },
+            "interface-ref": {
+             "config": {
+              "interface": "TenGigE0/0/0/20"
+             }
+            },
+            "timers": {
+             "config": {
+              "csnp-interval": 30
+             }
+            },
+            "authentication": {
+             "key": {
+              "config": {
+               "auth-password": "q328a6W4"
+              }
+             }
+            },
+            "afi-safi": {
+             "af": [
+              {
+               "afi-name": "openconfig-isis-types:IPV4",
+               "safi-name": "openconfig-isis-types:UNICAST",
+               "config": {
+                "afi-name": "openconfig-isis-types:IPV4",
+                "safi-name": "openconfig-isis-types:UNICAST",
+                "enabled": true
+               }
+              },
+              {
+               "afi-name": "openconfig-isis-types:IPV6",
+               "safi-name": "openconfig-isis-types:UNICAST",
+               "config": {
+                "afi-name": "openconfig-isis-types:IPV6",
+                "safi-name": "openconfig-isis-types:UNICAST",
+                "enabled": true
+               }
+              }
+             ]
+            }
+           },
+           {
+            "interface-id": "HundredGigE0/0/1/1",
+            "config": {
+             "interface-id": "HundredGigE0/0/1/1",
+             "enabled": true,
+             "passive": false,
+             "hello-padding": "STRICT",
+             "circuit-type": "POINT_TO_POINT"
+            },
+            "interface-ref": {
+             "config": {
+              "interface": "HundredGigE0/0/1/1"
+             }
+            },
+            "timers": {
+             "config": {
+              "csnp-interval": 30
+             }
+            },
+            "authentication": {
+             "key": {
+              "config": {
+               "auth-password": "q328a6W4"
+              }
+             }
+            },
+            "afi-safi": {
+             "af": [
+              {
+               "afi-name": "openconfig-isis-types:IPV4",
+               "safi-name": "openconfig-isis-types:UNICAST",
+               "config": {
+                "afi-name": "openconfig-isis-types:IPV4",
+                "safi-name": "openconfig-isis-types:UNICAST",
+                "enabled": true
+               }
+              },
+              {
+               "afi-name": "openconfig-isis-types:IPV6",
+               "safi-name": "openconfig-isis-types:UNICAST",
+               "config": {
+                "afi-name": "openconfig-isis-types:IPV6",
+                "safi-name": "openconfig-isis-types:UNICAST",
+                "enabled": true
+               }
+              }
+             ]
+            }
+           },
+           {
+            "interface-id": "HundredGigE0/0/1/2",
+            "config": {
+             "interface-id": "HundredGigE0/0/1/2",
+             "enabled": true,
+             "passive": false,
+             "hello-padding": "STRICT",
+             "circuit-type": "POINT_TO_POINT"
+            },
+            "interface-ref": {
+             "config": {
+              "interface": "HundredGigE0/0/1/2"
+             }
+            },
+            "timers": {
+             "config": {
+              "csnp-interval": 30
+             }
+            },
+            "authentication": {
+             "key": {
+              "config": {
+               "auth-password": "q328a6W4"
+              }
+             }
+            },
+            "afi-safi": {
+             "af": [
+              {
+               "afi-name": "openconfig-isis-types:IPV4",
+               "safi-name": "openconfig-isis-types:UNICAST",
+               "config": {
+                "afi-name": "openconfig-isis-types:IPV4",
+                "safi-name": "openconfig-isis-types:UNICAST",
+                "enabled": true
+               }
+              },
+              {
+               "afi-name": "openconfig-isis-types:IPV6",
+               "safi-name": "openconfig-isis-types:UNICAST",
+               "config": {
+                "afi-name": "openconfig-isis-types:IPV6",
+                "safi-name": "openconfig-isis-types:UNICAST",
+                "enabled": true
+               }
+              }
+             ]
+            }
+           }
+          ]
+         },
+         "levels": {
+          "level": [
+           {
+            "level-number": 1,
+            "config": {
+             "level-number": 1
+            },
+            "authentication": {
+             "key": {
+              "config": {
+               "auth-password": "q328a6W4"
+              }
+             }
+            }
+           },
+           {
+            "level-number": 2,
+            "config": {
+             "level-number": 2
+            },
+            "authentication": {
+             "key": {
+              "config": {
+               "auth-password": "q328a6W4"
+              }
+             }
+            }
+           }
+          ]
+         }
+        }
+       },
+       {
+        "identifier": "openconfig-policy-types:STATIC",
+        "name": "DEFAULT",
+        "config": {
+         "identifier": "openconfig-policy-types:STATIC",
+         "name": "DEFAULT"
+        },
+        "static-routes": {
+         "static": [
+          {
+           "prefix": "0.0.0.0/0",
+           "config": {
+            "prefix": "0.0.0.0/0"
+           },
+           "next-hops": {
+            "next-hop": [
+             {
+              "index": "##10.87.89.1##",
+              "config": {
+               "index": "##10.87.89.1##",
+               "next-hop": "10.87.89.1"
+              }
+             }
+            ]
+           }
+          },
+          {
+           "prefix": "::/0",
+           "config": {
+            "prefix": "::/0"
+           },
+           "next-hops": {
+            "next-hop": [
+             {
+              "index": "##2001:420:2cff:1204::1##",
+              "config": {
+               "index": "##2001:420:2cff:1204::1##",
+               "next-hop": "2001:420:2cff:1204::1"
+              }
+             }
+            ]
+           }
+          }
+         ]
+        }
+       },
+       {
+        "identifier": "openconfig-policy-types:BGP",
+        "name": "default",
+        "config": {
+         "identifier": "openconfig-policy-types:BGP",
+         "name": "default"
+        },
+        "bgp": {
+         "global": {
+          "config": {
+           "as": 7922,
+           "router-id": "162.151.250.13"
+          },
+          "graceful-restart": {
+           "config": {
+            "restart-time": 120,
+            "stale-routes-time": "360"
+           }
+          },
+          "afi-safis": {
+           "afi-safi": [
+            {
+             "afi-safi-name": "openconfig-bgp-types:IPV4_UNICAST",
+             "config": {
+              "afi-safi-name": "openconfig-bgp-types:IPV4_UNICAST",
+              "enabled": true
+             },
+             "use-multiple-paths": {
+              "ebgp": {
+               "config": {
+                "maximum-paths": 16
+               }
+              },
+              "ibgp": {
+               "config": {
+                "maximum-paths": 16
+               }
+              }
+             }
+            },
+            {
+             "afi-safi-name": "openconfig-bgp-types:IPV6_UNICAST",
+             "config": {
+              "afi-safi-name": "openconfig-bgp-types:IPV6_UNICAST",
+              "enabled": true
+             },
+             "use-multiple-paths": {
+              "ebgp": {
+               "config": {
+                "maximum-paths": 16
+               }
+              },
+              "ibgp": {
+               "config": {
+                "maximum-paths": 16
+               }
+              }
+             }
+            }
+           ]
+          }
+         },
+         "peer-groups": {
+          "peer-group": [
+           {
+            "peer-group-name": "iBGP-v4",
+            "config": {
+             "peer-group-name": "iBGP-v4",
+             "peer-as": 7922,
+             "description": "iBGP IPv4 session"
+            },
+            "afi-safis": {
+             "afi-safi": [
+              {
+               "afi-safi-name": "openconfig-bgp-types:IPV4_UNICAST",
+               "config": {
+                "afi-safi-name": "openconfig-bgp-types:IPV4_UNICAST",
+                "enabled": true
+               }
+              }
+             ]
+            }
+           },
+           {
+            "peer-group-name": "iBGP-v6",
+            "config": {
+             "peer-group-name": "iBGP-v6",
+             "peer-as": 7922,
+             "description": "iBGP IPv6 session"
+            },
+            "afi-safis": {
+             "afi-safi": [
+              {
+               "afi-safi-name": "openconfig-bgp-types:IPV6_UNICAST",
+               "config": {
+                "afi-safi-name": "openconfig-bgp-types:IPV6_UNICAST",
+                "enabled": true
+               }
+              }
+             ]
+            }
+           }
+          ]
+         },
+         "neighbors": {
+          "neighbor": [
+           {
+            "neighbor-address": "203.0.113.21",
+            "config": {
+             "neighbor-address": "203.0.113.21",
+             "peer-group": "iBGP-v4"
+            }
+           },
+           {
+            "neighbor-address": "2001:558:2::1",
+            "config": {
+             "neighbor-address": "2001:558:2::1",
+             "peer-group": "iBGP-v6"
+            }
+           }
+          ]
+         }
+        }
+       }
+      ]
+     },
+     "config": {
+      "name": "default"
+     }
+    }
+   ]
+  }
+ }
