@@ -1,4 +1,82 @@
 {
+  "openconfig-acl:acl": {
+   "acl-sets": {
+    "acl-set": [
+     {
+      "name": "MULTICAST-ADDRESS",
+      "type": "ACL_IPV4",
+      "config": {
+       "name": "MULTICAST-ADDRESS",
+       "type": "ACL_IPV4"
+      },
+      "acl-entries": {
+       "acl-entry": [
+        {
+         "sequence-id": 10,
+         "config": {
+          "sequence-id": 10
+         },
+         "actions": {
+          "config": {
+           "forwarding-action": "ACCEPT"
+          }
+         },
+         "ipv4": {
+          "config": {
+           "destination-address": "224.0.0.0/4"
+          }
+         }
+        }
+       ]
+      }
+     },
+     {
+      "name": "SNMP-ACCESS",
+      "type": "ACL_IPV6",
+      "config": {
+       "name": "SNMP-ACCESS",
+       "type": "ACL_IPV6"
+      },
+      "acl-entries": {
+       "acl-entry": [
+        {
+         "sequence-id": 10,
+         "config": {
+          "sequence-id": 10
+         },
+         "actions": {
+          "config": {
+           "forwarding-action": "ACCEPT"
+          }
+         },
+         "ipv6": {
+          "config": {
+           "source-address": "2001:db8:999::1/128"
+          }
+         }
+        },
+        {
+         "sequence-id": 20,
+         "config": {
+          "sequence-id": 20
+         },
+         "actions": {
+          "config": {
+           "forwarding-action": "ACCEPT"
+          }
+         },
+         "ipv6": {
+          "config": {
+           "source-address": "2001:db8:999::2/128"
+          }
+         }
+        }
+       ]
+      }
+     }
+    ]
+   }
+  },
   "openconfig-interfaces:interfaces": {
    "interface": [
     {
@@ -49,6 +127,134 @@
    }
   },
   "openconfig-routing-policy:routing-policy": {
+   "defined-sets": {
+    "prefix-sets": {
+     "prefix-set": [
+      {
+       "prefix-set-name": "IPV4-BOGONS-PFX",
+       "config": {
+        "prefix-set-name": "IPV4-BOGONS-PFX"
+       },
+       "prefixes": {
+        "prefix": [
+         {
+          "ip-prefix": "0.0.0.0/0",
+          "masklength-range": "exact",
+          "config": {
+           "ip-prefix": "0.0.0.0/0",
+           "masklength-range": "exact"
+          }
+         },
+         {
+          "ip-prefix": "0.0.0.0/8",
+          "masklength-range": "8..32",
+          "config": {
+           "ip-prefix": "0.0.0.0/8",
+           "masklength-range": "8..32"
+          }
+         },
+         {
+          "ip-prefix": "10.0.0.0/8",
+          "masklength-range": "8..32",
+          "config": {
+           "ip-prefix": "10.0.0.0/8",
+           "masklength-range": "8..32"
+          }
+         },
+         {
+          "ip-prefix": "127.0.0.0/8",
+          "masklength-range": "8..32",
+          "config": {
+           "ip-prefix": "127.0.0.0/8",
+           "masklength-range": "8..32"
+          }
+         },
+         {
+          "ip-prefix": "169.254.0.0/16",
+          "masklength-range": "16..32",
+          "config": {
+           "ip-prefix": "169.254.0.0/16",
+           "masklength-range": "16..32"
+          }
+         },
+         {
+          "ip-prefix": "172.16.0.0/12",
+          "masklength-range": "12..32",
+          "config": {
+           "ip-prefix": "172.16.0.0/12",
+           "masklength-range": "12..32"
+          }
+         },
+         {
+          "ip-prefix": "192.0.0.0/24",
+          "masklength-range": "24..32",
+          "config": {
+           "ip-prefix": "192.0.0.0/24",
+           "masklength-range": "24..32"
+          }
+         },
+         {
+          "ip-prefix": "192.0.2.0/24",
+          "masklength-range": "24..32",
+          "config": {
+           "ip-prefix": "192.0.2.0/24",
+           "masklength-range": "24..32"
+          }
+         },
+         {
+          "ip-prefix": "192.168.0.0/16",
+          "masklength-range": "16..32",
+          "config": {
+           "ip-prefix": "192.168.0.0/16",
+           "masklength-range": "16..32"
+          }
+         },
+         {
+          "ip-prefix": "198.18.0.0/15",
+          "masklength-range": "15..32",
+          "config": {
+           "ip-prefix": "198.18.0.0/15",
+           "masklength-range": "15..32"
+          }
+         },
+         {
+          "ip-prefix": "198.51.100.0/24",
+          "masklength-range": "24..32",
+          "config": {
+           "ip-prefix": "198.51.100.0/24",
+           "masklength-range": "24..32"
+          }
+         },
+         {
+          "ip-prefix": "203.0.113.0/24",
+          "masklength-range": "24..32",
+          "config": {
+           "ip-prefix": "203.0.113.0/24",
+           "masklength-range": "24..32"
+          }
+         },
+         {
+          "ip-prefix": "224.0.0.0/3",
+          "masklength-range": "3..32",
+          "config": {
+           "ip-prefix": "224.0.0.0/3",
+           "masklength-range": "3..32"
+          }
+         },
+         {
+          "ip-prefix": "100.64.0.0/10",
+          "masklength-range": "10..32",
+          "config": {
+           "ip-prefix": "100.64.0.0/10",
+           "masklength-range": "10..32"
+          }
+         }
+        ]
+       }
+      }
+     ]
+    }
+   },
    "policy-definitions": {
     "policy-definition": [
      {
@@ -59,9 +265,9 @@
       "statements": {
        "statement": [
         {
-         "name": "statement-1530800552846210",
+         "name": "statement-1530803638181668",
          "config": {
-          "name": "statement-1530800552846210"
+          "name": "statement-1530803638181668"
          },
          "actions": {
           "config": {
@@ -82,9 +288,9 @@
       "statements": {
        "statement": [
         {
-         "name": "statement-1530800552846329",
+         "name": "statement-1530803638181795",
          "config": {
-          "name": "statement-1530800552846329"
+          "name": "statement-1530803638181795"
          },
          "actions": {
           "config": {
@@ -95,6 +301,12 @@
          }
         }
        ]
+      }
+     },
+     {
+      "name": "BLOCK-IPV4-BOGONS",
+      "config": {
+       "name": "BLOCK-IPV4-BOGONS"
       }
      }
     ]
@@ -173,6 +385,24 @@
         }
        ]
       }
+     },
+     {
+      "group-id": "Ubuntu2",
+      "config": {
+       "group-id": "Ubuntu2"
+      },
+      "destinations": {
+       "destination": [
+        {
+         "destination-address": "2001:420:2cff:1204::102",
+         "destination-port": 57500,
+         "config": {
+          "destination-address": "2001:420:2cff:1204::102",
+          "destination-port": 57500
+         }
+        }
+       ]
+      }
      }
     ]
    }
@@ -191,10 +421,10 @@
       "protocol": [
        {
         "identifier": "openconfig-policy-types:ISIS",
-        "name": "BB2",
+        "name": "NAME",
         "config": {
          "identifier": "openconfig-policy-types:ISIS",
-         "name": "BB2"
+         "name": "NAME"
         },
         "isis": {
          "global": {
@@ -241,8 +471,8 @@
           },
           "timers": {
            "config": {
-            "lsp-lifetime-interval": 4000,
-            "lsp-refresh-interval": 3600
+            "lsp-refresh-interval": 3600,
+            "lsp-lifetime-interval": 4000
            }
           }
          },
@@ -303,13 +533,6 @@
               "csnp-interval": 30
              }
             },
-            "authentication": {
-             "key": {
-              "config": {
-               "auth-password": "q328a6W4"
-              }
-             }
-            },
             "afi-safi": {
              "af": [
               {
@@ -350,13 +573,6 @@
             "timers": {
              "config": {
               "csnp-interval": 30
-             }
-            },
-            "authentication": {
-             "key": {
-              "config": {
-               "auth-password": "q328a6W4"
-              }
              }
             },
             "afi-safi": {
@@ -401,13 +617,6 @@
               "csnp-interval": 30
              }
             },
-            "authentication": {
-             "key": {
-              "config": {
-               "auth-password": "q328a6W4"
-              }
-             }
-            },
             "afi-safi": {
              "af": [
               {
@@ -429,36 +638,6 @@
                }
               }
              ]
-            }
-           }
-          ]
-         },
-         "levels": {
-          "level": [
-           {
-            "level-number": 1,
-            "config": {
-             "level-number": 1
-            },
-            "authentication": {
-             "key": {
-              "config": {
-               "auth-password": "q328a6W4"
-              }
-             }
-            }
-           },
-           {
-            "level-number": 2,
-            "config": {
-             "level-number": 2
-            },
-            "authentication": {
-             "key": {
-              "config": {
-               "auth-password": "q328a6W4"
-              }
-             }
             }
            }
           ]
@@ -521,7 +700,7 @@
         "bgp": {
          "global": {
           "config": {
-           "as": 7922,
+           "as": 64922,
            "router-id": "162.151.250.13"
           },
           "graceful-restart": {
@@ -579,7 +758,7 @@
             "peer-group-name": "iBGP-v4",
             "config": {
              "peer-group-name": "iBGP-v4",
-             "peer-as": 7922,
+             "peer-as": 64922,
              "description": "iBGP IPv4 session"
             },
             "afi-safis": {
@@ -598,7 +777,7 @@
             "peer-group-name": "iBGP-v6",
             "config": {
              "peer-group-name": "iBGP-v6",
-             "peer-as": 7922,
+             "peer-as": 64922,
              "description": "iBGP IPv6 session"
             },
             "afi-safis": {
