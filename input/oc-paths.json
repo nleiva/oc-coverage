@@ -1,10 +1,13 @@
 {	
-    "openconfig-platform:components": [null],
+    "openconfig-acl:acl": [null],
     "openconfig-interfaces:interfaces": [null],
-    "openconfig-local-routing:local-routes": [null],
-    "openconfig-mpls:mpls": [null],
     "openconfig-lacp:lacp": [null],
-    "openconfig-vlan:vlans": [null],
+    "openconfig-lldp:lldp": [null],
+    "openconfig-local-routing:local-routes": [null],
+    "openconfig-mpls:mpls": [null],   
     "openconfig-network-instance:network-instances": [null],
-    "openconfig-telemetry:telemetry-system": [null]
+    "openconfig-platform:components": [null],
+    "openconfig-routing-policy:routing-policy": [null],
+    "openconfig-telemetry:telemetry-system": [null],
+    "openconfig-vlan:vlans": [null]
 }

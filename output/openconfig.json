@@ -48,6 +48,58 @@
     ]
    }
   },
+  "openconfig-routing-policy:routing-policy": {
+   "policy-definitions": {
+    "policy-definition": [
+     {
+      "name": "POLICY-IN",
+      "config": {
+       "name": "POLICY-IN"
+      },
+      "statements": {
+       "statement": [
+        {
+         "name": "statement-1530800552846210",
+         "config": {
+          "name": "statement-1530800552846210"
+         },
+         "actions": {
+          "config": {
+           "accept-route": [
+            null
+           ]
+          }
+         }
+        }
+       ]
+      }
+     },
+     {
+      "name": "POLICY-OUT",
+      "config": {
+       "name": "POLICY-OUT"
+      },
+      "statements": {
+       "statement": [
+        {
+         "name": "statement-1530800552846329",
+         "config": {
+          "name": "statement-1530800552846329"
+         },
+         "actions": {
+          "config": {
+           "accept-route": [
+            null
+           ]
+          }
+         }
+        }
+       ]
+      }
+     }
+    ]
+   }
+  },
   "openconfig-telemetry:telemetry-system": {
    "sensor-groups": {
     "sensor-group": [
@@ -123,6 +175,12 @@
       }
      }
     ]
+   }
+  },
+  "openconfig-lldp:lldp": {
+   "config": {
+    "enabled": true,
+    "hello-timer": "5"
    }
   },
   "openconfig-network-instance:network-instances": {
