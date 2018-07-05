@@ -8,7 +8,7 @@ A simple example to understand OpenConfig coverage of your IOS XR router config.
 
 ### Enviroment variables
 
-- Target device details:
+Target device details:
 
 - USER (E.g. root)
 - PASSWORD (E.g. mypassword)
