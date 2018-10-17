@@ -1,5 +1,7 @@
 # OpenConfig coverage
 
+[![published](https://static.production.devnetcloud.com/codeexchange/assets/images/devnet-published.svg)](https://developer.cisco.com/codeexchange/github/repo/nleiva/oc-coverage)
+
 A simple example to understand OpenConfig coverage of your IOS XR router config. It will retrieve the original config of a device, then pull the OpenConfig version of it. The target device config will be replaced by a minimum setup to allow remote access, and then the OpenConfig config will be applied on top of it. The result will be compared to the initial state to determine the coverage gap.
 
 ![coverage](static/oc-diff.svg)
