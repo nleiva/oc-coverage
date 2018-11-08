@@ -3,10 +3,10 @@
    "acl-sets": {
     "acl-set": [
      {
-      "name": "MULTICAST-ADDRESS",
+      "name": "ROUTING",
       "type": "ACL_IPV4",
       "config": {
-       "name": "MULTICAST-ADDRESS",
+       "name": "ROUTING",
        "type": "ACL_IPV4"
       },
       "acl-entries": {
@@ -23,7 +23,30 @@
          },
          "ipv4": {
           "config": {
-           "destination-address": "224.0.0.0/4"
+           "dscp": 48
+          }
+         }
+        }
+       ]
+      }
+     },
+     {
+      "name": "PERMIT-ANY",
+      "type": "ACL_IPV4",
+      "config": {
+       "name": "PERMIT-ANY",
+       "type": "ACL_IPV4"
+      },
+      "acl-entries": {
+       "acl-entry": [
+        {
+         "sequence-id": 10,
+         "config": {
+          "sequence-id": 10
+         },
+         "actions": {
+          "config": {
+           "forwarding-action": "ACCEPT"
           }
          }
         }
@@ -51,7 +74,7 @@
          },
          "ipv6": {
           "config": {
-           "source-address": "2001:db8:999::1/128"
+           "source-address": "2001:db8::cafe/128"
           }
          }
         },
@@ -67,7 +90,30 @@
          },
          "ipv6": {
           "config": {
-           "source-address": "2001:db8:999::2/128"
+           "source-address": "2001:420::/32"
+          }
+         }
+        }
+       ]
+      }
+     },
+     {
+      "name": "IPV6-PERMIT-ANY",
+      "type": "ACL_IPV6",
+      "config": {
+       "name": "IPV6-PERMIT-ANY",
+       "type": "ACL_IPV6"
+      },
+      "acl-entries": {
+       "acl-entry": [
+        {
+         "sequence-id": 10,
+         "config": {
+          "sequence-id": 10
+         },
+         "actions": {
+          "config": {
+           "forwarding-action": "ACCEPT"
           }
          }
         }
@@ -79,6 +125,329 @@
   },
   "openconfig-interfaces:interfaces": {
    "interface": [
+    {
+     "name": "Loopback60",
+     "config": {
+      "name": "Loopback60",
+      "type": "iana-if-type:softwareLoopback",
+      "enabled": true
+     },
+     "subinterfaces": {
+      "subinterface": [
+       {
+        "index": 0,
+        "openconfig-if-ip:ipv4": {
+         "addresses": {
+          "address": [
+           {
+            "ip": "203.0.113.22",
+            "config": {
+             "ip": "203.0.113.22",
+             "prefix-length": 32
+            }
+           }
+          ]
+         }
+        },
+        "openconfig-if-ip:ipv6": {
+         "addresses": {
+          "address": [
+           {
+            "ip": "2001:558:2::2",
+            "config": {
+             "ip": "2001:558:2::2",
+             "prefix-length": 128
+            }
+           }
+          ]
+         }
+        }
+       }
+      ]
+     }
+    },
+    {
+     "name": "HundredGigE0/0/0/0",
+     "config": {
+      "name": "HundredGigE0/0/0/0",
+      "type": "iana-if-type:ethernetCsmacd",
+      "enabled": true,
+      "description": "TRANSPORT: mrstn-5502-1.cisco.com",
+      "mtu": 9192
+     },
+     "openconfig-if-ethernet:ethernet": {
+      "config": {
+       "auto-negotiate": false
+      }
+     },
+     "subinterfaces": {
+      "subinterface": [
+       {
+        "index": 0,
+        "openconfig-if-ip:ipv4": {
+         "addresses": {
+          "address": [
+           {
+            "ip": "192.0.0.2",
+            "config": {
+             "ip": "192.0.0.2",
+             "prefix-length": 24
+            }
+           }
+          ]
+         }
+        },
+        "openconfig-if-ip:ipv6": {
+         "addresses": {
+          "address": [
+           {
+            "ip": "2001:db8::22",
+            "config": {
+             "ip": "2001:db8::22",
+             "prefix-length": 64
+            }
+           },
+           {
+            "ip": "2001:f00:2122::2",
+            "config": {
+             "ip": "2001:f00:2122::2",
+             "prefix-length": 64
+            }
+           }
+          ]
+         }
+        }
+       }
+      ]
+     }
+    },
+    {
+     "name": "HundredGigE0/0/0/1",
+     "config": {
+      "name": "HundredGigE0/0/0/1",
+      "type": "iana-if-type:ethernetCsmacd",
+      "enabled": true,
+      "description": "DIRECT: mrstn-5501-1.cisco.com",
+      "mtu": 9192
+     },
+     "openconfig-if-ethernet:ethernet": {
+      "config": {
+       "auto-negotiate": false
+      }
+     },
+     "subinterfaces": {
+      "subinterface": [
+       {
+        "index": 0,
+        "openconfig-if-ip:ipv4": {
+         "addresses": {
+          "address": [
+           {
+            "ip": "192.0.121.20",
+            "config": {
+             "ip": "192.0.121.20",
+             "prefix-length": 24
+            }
+           }
+          ]
+         }
+        },
+        "openconfig-if-ip:ipv6": {
+         "addresses": {
+          "address": [
+           {
+            "ip": "2001:f00:1122::22",
+            "config": {
+             "ip": "2001:f00:1122::22",
+             "prefix-length": 64
+            }
+           }
+          ]
+         }
+        }
+       }
+      ]
+     }
+    },
+    {
+     "name": "HundredGigE0/0/0/2",
+     "config": {
+      "name": "HundredGigE0/0/0/2",
+      "type": "iana-if-type:ethernetCsmacd",
+      "enabled": true,
+      "description": "DIRECT: mrstn-5501-2.cisco.com",
+      "mtu": 9192
+     },
+     "openconfig-if-ethernet:ethernet": {
+      "config": {
+       "auto-negotiate": false
+      }
+     },
+     "subinterfaces": {
+      "subinterface": [
+       {
+        "index": 0,
+        "openconfig-if-ip:ipv4": {
+         "addresses": {
+          "address": [
+           {
+            "ip": "192.0.122.20",
+            "config": {
+             "ip": "192.0.122.20",
+             "prefix-length": 24
+            }
+           }
+          ]
+         }
+        },
+        "openconfig-if-ip:ipv6": {
+         "addresses": {
+          "address": [
+           {
+            "ip": "2001:f00:1222::22",
+            "config": {
+             "ip": "2001:f00:1222::22",
+             "prefix-length": 64
+            }
+           }
+          ]
+         }
+        }
+       }
+      ]
+     }
+    },
+    {
+     "name": "HundredGigE0/0/0/3",
+     "config": {
+      "name": "HundredGigE0/0/0/3",
+      "type": "iana-if-type:ethernetCsmacd",
+      "enabled": true,
+      "description": "DIRECT: mrstn-5501-3.cisco.com",
+      "mtu": 9192
+     },
+     "openconfig-if-ethernet:ethernet": {
+      "config": {
+       "auto-negotiate": false
+      }
+     },
+     "subinterfaces": {
+      "subinterface": [
+       {
+        "index": 0,
+        "openconfig-if-ip:ipv4": {
+         "addresses": {
+          "address": [
+           {
+            "ip": "192.0.123.20",
+            "config": {
+             "ip": "192.0.123.20",
+             "prefix-length": 24
+            }
+           }
+          ]
+         }
+        },
+        "openconfig-if-ip:ipv6": {
+         "addresses": {
+          "address": [
+           {
+            "ip": "2001:f00:1322::22",
+            "config": {
+             "ip": "2001:f00:1322::22",
+             "prefix-length": 64
+            }
+           }
+          ]
+         }
+        }
+       }
+      ]
+     }
+    },
+    {
+     "name": "HundredGigE0/0/0/4",
+     "config": {
+      "name": "HundredGigE0/0/0/4",
+      "type": "iana-if-type:ethernetCsmacd",
+      "enabled": true,
+      "description": "DIRECT: mrstn-5501-4.cisco.com",
+      "mtu": 9192
+     },
+     "openconfig-if-ethernet:ethernet": {
+      "config": {
+       "auto-negotiate": false
+      }
+     },
+     "subinterfaces": {
+      "subinterface": [
+       {
+        "index": 0,
+        "openconfig-if-ip:ipv4": {
+         "addresses": {
+          "address": [
+           {
+            "ip": "192.0.124.20",
+            "config": {
+             "ip": "192.0.124.20",
+             "prefix-length": 24
+            }
+           }
+          ]
+         }
+        },
+        "openconfig-if-ip:ipv6": {
+         "addresses": {
+          "address": [
+           {
+            "ip": "2001:f00:1422::22",
+            "config": {
+             "ip": "2001:f00:1422::22",
+             "prefix-length": 64
+            }
+           }
+          ]
+         }
+        }
+       }
+      ]
+     }
+    },
+    {
+     "name": "HundredGigE0/0/0/16",
+     "config": {
+      "name": "HundredGigE0/0/0/16",
+      "type": "iana-if-type:ethernetCsmacd",
+      "enabled": true,
+      "description": "ygot test",
+      "mtu": 9192
+     },
+     "openconfig-if-ethernet:ethernet": {
+      "config": {
+       "auto-negotiate": false
+      }
+     },
+     "subinterfaces": {
+      "subinterface": [
+       {
+        "index": 0,
+        "openconfig-if-ip:ipv6": {
+         "addresses": {
+          "address": [
+           {
+            "ip": "2001:db8:cafe::22",
+            "config": {
+             "ip": "2001:db8:cafe::22",
+             "prefix-length": 64
+            }
+           }
+          ]
+         }
+        }
+       }
+      ]
+     }
+    },
     {
      "name": "MgmtEth0/RP0/CPU0/0",
      "config": {
@@ -99,9 +468,9 @@
          "addresses": {
           "address": [
            {
-            "ip": "2001:420:2cff:1204::5501:3",
+            "ip": "2001:420:2cff:1204::5502:2",
             "config": {
-             "ip": "2001:420:2cff:1204::5501:3",
+             "ip": "2001:420:2cff:1204::5502:2",
              "prefix-length": 64
             }
            }
@@ -118,6 +487,48 @@
    "interfaces": {
     "interface": [
      {
+      "name": "Loopback60",
+      "config": {
+       "name": "Loopback60"
+      }
+     },
+     {
+      "name": "HundredGigE0/0/0/0",
+      "config": {
+       "name": "HundredGigE0/0/0/0"
+      }
+     },
+     {
+      "name": "HundredGigE0/0/0/1",
+      "config": {
+       "name": "HundredGigE0/0/0/1"
+      }
+     },
+     {
+      "name": "HundredGigE0/0/0/2",
+      "config": {
+       "name": "HundredGigE0/0/0/2"
+      }
+     },
+     {
+      "name": "HundredGigE0/0/0/3",
+      "config": {
+       "name": "HundredGigE0/0/0/3"
+      }
+     },
+     {
+      "name": "HundredGigE0/0/0/4",
+      "config": {
+       "name": "HundredGigE0/0/0/4"
+      }
+     },
+     {
+      "name": "HundredGigE0/0/0/16",
+      "config": {
+       "name": "HundredGigE0/0/0/16"
+      }
+     },
+     {
       "name": "MgmtEth0/RP0/CPU0/0",
       "config": {
        "name": "MgmtEth0/RP0/CPU0/0"
@@ -127,147 +538,19 @@
    }
   },
   "openconfig-routing-policy:routing-policy": {
-   "defined-sets": {
-    "prefix-sets": {
-     "prefix-set": [
-      {
-       "prefix-set-name": "IPV4-BOGONS-PFX",
-       "config": {
-        "prefix-set-name": "IPV4-BOGONS-PFX"
-       },
-       "prefixes": {
-        "prefix": [
-         {
-          "ip-prefix": "0.0.0.0/0",
-          "masklength-range": "exact",
-          "config": {
-           "ip-prefix": "0.0.0.0/0",
-           "masklength-range": "exact"
-          }
-         },
-         {
-          "ip-prefix": "0.0.0.0/8",
-          "masklength-range": "8..32",
-          "config": {
-           "ip-prefix": "0.0.0.0/8",
-           "masklength-range": "8..32"
-          }
-         },
-         {
-          "ip-prefix": "10.0.0.0/8",
-          "masklength-range": "8..32",
-          "config": {
-           "ip-prefix": "10.0.0.0/8",
-           "masklength-range": "8..32"
-          }
-         },
-         {
-          "ip-prefix": "127.0.0.0/8",
-          "masklength-range": "8..32",
-          "config": {
-           "ip-prefix": "127.0.0.0/8",
-           "masklength-range": "8..32"
-          }
-         },
-         {
-          "ip-prefix": "169.254.0.0/16",
-          "masklength-range": "16..32",
-          "config": {
-           "ip-prefix": "169.254.0.0/16",
-           "masklength-range": "16..32"
-          }
-         },
-         {
-          "ip-prefix": "172.16.0.0/12",
-          "masklength-range": "12..32",
-          "config": {
-           "ip-prefix": "172.16.0.0/12",
-           "masklength-range": "12..32"
-          }
-         },
-         {
-          "ip-prefix": "192.0.0.0/24",
-          "masklength-range": "24..32",
-          "config": {
-           "ip-prefix": "192.0.0.0/24",
-           "masklength-range": "24..32"
-          }
-         },
-         {
-          "ip-prefix": "192.0.2.0/24",
-          "masklength-range": "24..32",
-          "config": {
-           "ip-prefix": "192.0.2.0/24",
-           "masklength-range": "24..32"
-          }
-         },
-         {
-          "ip-prefix": "192.168.0.0/16",
-          "masklength-range": "16..32",
-          "config": {
-           "ip-prefix": "192.168.0.0/16",
-           "masklength-range": "16..32"
-          }
-         },
-         {
-          "ip-prefix": "198.18.0.0/15",
-          "masklength-range": "15..32",
-          "config": {
-           "ip-prefix": "198.18.0.0/15",
-           "masklength-range": "15..32"
-          }
-         },
-         {
-          "ip-prefix": "198.51.100.0/24",
-          "masklength-range": "24..32",
-          "config": {
-           "ip-prefix": "198.51.100.0/24",
-           "masklength-range": "24..32"
-          }
-         },
-         {
-          "ip-prefix": "203.0.113.0/24",
-          "masklength-range": "24..32",
-          "config": {
-           "ip-prefix": "203.0.113.0/24",
-           "masklength-range": "24..32"
-          }
-         },
-         {
-          "ip-prefix": "224.0.0.0/3",
-          "masklength-range": "3..32",
-          "config": {
-           "ip-prefix": "224.0.0.0/3",
-           "masklength-range": "3..32"
-          }
-         },
-         {
-          "ip-prefix": "100.64.0.0/10",
-          "masklength-range": "10..32",
-          "config": {
-           "ip-prefix": "100.64.0.0/10",
-           "masklength-range": "10..32"
-          }
-         }
-        ]
-       }
-      }
-     ]
-    }
-   },
    "policy-definitions": {
     "policy-definition": [
      {
-      "name": "POLICY-IN",
+      "name": "PASS-ALL",
       "config": {
-       "name": "POLICY-IN"
+       "name": "PASS-ALL"
       },
       "statements": {
        "statement": [
         {
-         "name": "statement-1530803638181668",
+         "name": "statement-1541707499134135",
          "config": {
-          "name": "statement-1530803638181668"
+          "name": "statement-1541707499134135"
          },
          "actions": {
           "config": {
@@ -281,20 +564,20 @@
       }
      },
      {
-      "name": "POLICY-OUT",
+      "name": "NO-ROUTES",
       "config": {
-       "name": "POLICY-OUT"
+       "name": "NO-ROUTES"
       },
       "statements": {
        "statement": [
         {
-         "name": "statement-1530803638181795",
+         "name": "statement-1541707499134341",
          "config": {
-          "name": "statement-1530803638181795"
+          "name": "statement-1541707499134341"
          },
          "actions": {
           "config": {
-           "accept-route": [
+           "reject-route": [
             null
            ]
           }
@@ -304,10 +587,7 @@
       }
      },
      {
-      "name": "BLOCK-IPV4-BOGONS",
-      "config": {
-       "name": "BLOCK-IPV4-BOGONS"
-      }
+      "name": "IPV6-NEXT-HOP-TRACKING"
      }
     ]
    }
@@ -330,6 +610,22 @@
         }
        ]
       }
+     },
+     {
+      "sensor-group-id": "BGPNeighbor-OC",
+      "config": {
+       "sensor-group-id": "BGPNeighbor-OC"
+      },
+      "sensor-paths": {
+       "sensor-path": [
+        {
+         "path": "openconfig-network-instance:network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/state",
+         "config": {
+          "path": "openconfig-network-instance:network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/state"
+         }
+        }
+       ]
+      }
      }
     ]
    },
@@ -337,27 +633,17 @@
     "persistent": {
      "subscription": [
       {
-       "subscription-id": "TEST",
+       "subscription-id": "BGP-OC",
        "config": {
-        "subscription-id": "TEST"
+        "subscription-id": "BGP-OC"
        },
        "sensor-profiles": {
         "sensor-profile": [
          {
-          "sensor-group": "LLDP",
+          "sensor-group": "BGPNeighbor-OC",
           "config": {
-           "sensor-group": "LLDP",
-           "sample-interval": "60000"
-          }
-         }
-        ]
-       },
-       "destination-groups": {
-        "destination-group": [
-         {
-          "group-id": "Ubuntu1",
-          "config": {
-           "group-id": "Ubuntu1"
+           "sensor-group": "BGPNeighbor-OC",
+           "sample-interval": "1000"
           }
          }
         ]
@@ -385,24 +671,6 @@
         }
        ]
       }
-     },
-     {
-      "group-id": "Ubuntu2",
-      "config": {
-       "group-id": "Ubuntu2"
-      },
-      "destinations": {
-       "destination": [
-        {
-         "destination-address": "2001:420:2cff:1204::102",
-         "destination-port": 57500,
-         "config": {
-          "destination-address": "2001:420:2cff:1204::102",
-          "destination-port": 57500
-         }
-        }
-       ]
-      }
      }
     ]
    }
@@ -421,18 +689,17 @@
       "protocol": [
        {
         "identifier": "openconfig-policy-types:ISIS",
-        "name": "NAME",
+        "name": "BB2",
         "config": {
          "identifier": "openconfig-policy-types:ISIS",
-         "name": "NAME"
+         "name": "BB2"
         },
         "isis": {
          "global": {
           "config": {
            "level-capability": "LEVEL_2",
-           "max-ecmp-paths": 32,
            "net": [
-            "49.0000.0162.0151.0250.0013.00"
+            "49.0000.0162.0151.0250.0002.00"
            ]
           },
           "nsr": {
@@ -457,22 +724,10 @@
             }
            }
           },
-          "afi-safi": {
-           "af": [
-            {
-             "afi-name": "openconfig-isis-types:IPV4",
-             "safi-name": "openconfig-isis-types:UNICAST",
-             "config": {
-              "afi-name": "openconfig-isis-types:IPV4",
-              "safi-name": "openconfig-isis-types:UNICAST"
-             }
-            }
-           ]
-          },
           "timers": {
            "config": {
-            "lsp-refresh-interval": 3600,
-            "lsp-lifetime-interval": 4000
+            "lsp-lifetime-interval": 4000,
+            "lsp-refresh-interval": 3600
            }
           }
          },
@@ -515,9 +770,9 @@
             }
            },
            {
-            "interface-id": "TenGigE0/0/0/20",
+            "interface-id": "HundredGigE0/0/0/0",
             "config": {
-             "interface-id": "TenGigE0/0/0/20",
+             "interface-id": "HundredGigE0/0/0/0",
              "enabled": true,
              "passive": false,
              "hello-padding": "STRICT",
@@ -525,12 +780,19 @@
             },
             "interface-ref": {
              "config": {
-              "interface": "TenGigE0/0/0/20"
+              "interface": "HundredGigE0/0/0/0"
              }
             },
             "timers": {
              "config": {
               "csnp-interval": 30
+             }
+            },
+            "authentication": {
+             "key": {
+              "config": {
+               "auth-password": "q328a6W4"
+              }
              }
             },
             "afi-safi": {
@@ -555,89 +817,35 @@
               }
              ]
             }
-           },
+           }
+          ]
+         },
+         "levels": {
+          "level": [
            {
-            "interface-id": "HundredGigE0/0/1/1",
+            "level-number": 1,
             "config": {
-             "interface-id": "HundredGigE0/0/1/1",
-             "enabled": true,
-             "passive": false,
-             "hello-padding": "STRICT",
-             "circuit-type": "POINT_TO_POINT"
+             "level-number": 1
             },
-            "interface-ref": {
-             "config": {
-              "interface": "HundredGigE0/0/1/1"
-             }
-            },
-            "timers": {
-             "config": {
-              "csnp-interval": 30
-             }
-            },
-            "afi-safi": {
-             "af": [
-              {
-               "afi-name": "openconfig-isis-types:IPV4",
-               "safi-name": "openconfig-isis-types:UNICAST",
-               "config": {
-                "afi-name": "openconfig-isis-types:IPV4",
-                "safi-name": "openconfig-isis-types:UNICAST",
-                "enabled": true
-               }
-              },
-              {
-               "afi-name": "openconfig-isis-types:IPV6",
-               "safi-name": "openconfig-isis-types:UNICAST",
-               "config": {
-                "afi-name": "openconfig-isis-types:IPV6",
-                "safi-name": "openconfig-isis-types:UNICAST",
-                "enabled": true
-               }
+            "authentication": {
+             "key": {
+              "config": {
+               "auth-password": "q328a6W4"
               }
-             ]
+             }
             }
            },
            {
-            "interface-id": "HundredGigE0/0/1/2",
+            "level-number": 2,
             "config": {
-             "interface-id": "HundredGigE0/0/1/2",
-             "enabled": true,
-             "passive": false,
-             "hello-padding": "STRICT",
-             "circuit-type": "POINT_TO_POINT"
+             "level-number": 2
             },
-            "interface-ref": {
-             "config": {
-              "interface": "HundredGigE0/0/1/2"
-             }
-            },
-            "timers": {
-             "config": {
-              "csnp-interval": 30
-             }
-            },
-            "afi-safi": {
-             "af": [
-              {
-               "afi-name": "openconfig-isis-types:IPV4",
-               "safi-name": "openconfig-isis-types:UNICAST",
-               "config": {
-                "afi-name": "openconfig-isis-types:IPV4",
-                "safi-name": "openconfig-isis-types:UNICAST",
-                "enabled": true
-               }
-              },
-              {
-               "afi-name": "openconfig-isis-types:IPV6",
-               "safi-name": "openconfig-isis-types:UNICAST",
-               "config": {
-                "afi-name": "openconfig-isis-types:IPV6",
-                "safi-name": "openconfig-isis-types:UNICAST",
-                "enabled": true
-               }
+            "authentication": {
+             "key": {
+              "config": {
+               "auth-password": "q328a6W4"
               }
-             ]
+             }
             }
            }
           ]
@@ -700,85 +908,29 @@
         "bgp": {
          "global": {
           "config": {
-           "as": 64922,
-           "router-id": "162.151.250.13"
-          },
-          "graceful-restart": {
-           "config": {
-            "restart-time": 120,
-            "stale-routes-time": "360"
-           }
+           "as": 64512,
+           "router-id": "203.0.113.22"
           },
           "afi-safis": {
            "afi-safi": [
-            {
-             "afi-safi-name": "openconfig-bgp-types:IPV4_UNICAST",
-             "config": {
-              "afi-safi-name": "openconfig-bgp-types:IPV4_UNICAST",
-              "enabled": true
-             },
-             "use-multiple-paths": {
-              "ebgp": {
-               "config": {
-                "maximum-paths": 16
-               }
-              },
-              "ibgp": {
-               "config": {
-                "maximum-paths": 16
-               }
-              }
-             }
-            },
             {
              "afi-safi-name": "openconfig-bgp-types:IPV6_UNICAST",
              "config": {
               "afi-safi-name": "openconfig-bgp-types:IPV6_UNICAST",
               "enabled": true
-             },
-             "use-multiple-paths": {
-              "ebgp": {
-               "config": {
-                "maximum-paths": 16
-               }
-              },
-              "ibgp": {
-               "config": {
-                "maximum-paths": 16
-               }
-              }
              }
             }
            ]
           }
          },
-         "peer-groups": {
-          "peer-group": [
+         "neighbors": {
+          "neighbor": [
            {
-            "peer-group-name": "iBGP-v4",
+            "neighbor-address": "2001:db8::21",
             "config": {
-             "peer-group-name": "iBGP-v4",
-             "peer-as": 64922,
-             "description": "iBGP IPv4 session"
-            },
-            "afi-safis": {
-             "afi-safi": [
-              {
-               "afi-safi-name": "openconfig-bgp-types:IPV4_UNICAST",
-               "config": {
-                "afi-safi-name": "openconfig-bgp-types:IPV4_UNICAST",
-                "enabled": true
-               }
-              }
-             ]
-            }
-           },
-           {
-            "peer-group-name": "iBGP-v6",
-            "config": {
-             "peer-group-name": "iBGP-v6",
-             "peer-as": 64922,
-             "description": "iBGP IPv6 session"
+             "neighbor-address": "2001:db8::21",
+             "peer-as": 64512,
+             "description": "iBGP session"
             },
             "afi-safis": {
              "afi-safi": [
@@ -790,24 +942,6 @@
                }
               }
              ]
-            }
-           }
-          ]
-         },
-         "neighbors": {
-          "neighbor": [
-           {
-            "neighbor-address": "203.0.113.21",
-            "config": {
-             "neighbor-address": "203.0.113.21",
-             "peer-group": "iBGP-v4"
-            }
-           },
-           {
-            "neighbor-address": "2001:558:2::1",
-            "config": {
-             "neighbor-address": "2001:558:2::1",
-             "peer-group": "iBGP-v6"
             }
            }
           ]
